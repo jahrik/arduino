@@ -2,6 +2,17 @@
 - hosts: local
   become: true
   become_method: sudo
+  vars:
+    arduino_port: /dev/ttyACM0  # communication port (usually /dev/ttyACM*)
+    arduino_project:
+      - blink
+      - switch
+    arduino_model: uno
+    arduino: 161
+    arduino_dir: /usr/share/arduino
+    arduino_avr_txt: /hardware/archlinux-arduino/avr/boards.txt
+    arduino_variant: /hardware/archlinux-arduino/avr/variants/standard
+    arduino_core: /hardware/archlinux-arduino/avr/cores/arduino
   tasks:
 
   - name: Install arduino software
@@ -11,6 +22,7 @@
     with_items:
       - arduino
       - arduino-docs
+      - arduino-avr-core
     tags:
       - setup
 
@@ -25,5 +37,11 @@
     tags:
       - "setup"
 
-# Base Makefile
-# https://github.com/tomswartz07/arduino-makefile/blob/master/Makefile
+  - name: Generate Makefile
+    # https://github.com/tomswartz07/arduino-makefile/blob/master/Makefile
+    template:
+      src: Makefile.j2
+      dest: "{{ item }}/Makefile"
+      mode: 0644
+    become: false
+    with_items: "{{ arduino_project }}"
