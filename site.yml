@@ -1,0 +1,29 @@
+---
+- hosts: local
+  become: true
+  become_method: sudo
+  tasks:
+
+  - name: Install arduino software
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - arduino
+      - arduino-docs
+    tags:
+      - setup
+
+  - name: Add "{{ lookup('env','USER') }}" to uucp and lock groups
+    user:
+      name: "{{ lookup('env','USER') }}"
+      groups: "{{ item }}"
+      append: yes
+    with_items:
+      - uucp
+      - lock
+    tags:
+      - "setup"
+
+# Base Makefile
+# https://github.com/tomswartz07/arduino-makefile/blob/master/Makefile
