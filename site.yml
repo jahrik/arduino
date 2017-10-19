@@ -7,6 +7,7 @@
     arduino_project:
       - blink
       - switch
+      - state
     arduino_model: uno
     arduino: 161
     arduino_dir: /usr/share/arduino
