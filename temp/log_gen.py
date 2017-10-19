@@ -10,7 +10,13 @@ import json
 import serial
 
 PORT = sys.argv[1]
-SER = serial.Serial(PORT, 9600, timeout=1)
+
+try:
+    SER = serial.Serial(PORT, 9600, timeout=1)
+
+except serial.SerialException as exc:
+    print(exc)
+
 time.sleep(3)
 for i in range(0, 10):
     while True:
