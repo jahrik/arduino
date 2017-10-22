@@ -50,7 +50,7 @@ def main():
                     stamp = datetime.datetime.now().isoformat()
                     json_data = json.loads(data.decode('utf8'))
                     json_data['@timestamp'] = stamp
-                    temp_f = c_to_f(json_data['temp'])
+                    temp_f = c_to_f(json_data['celsius'])
                     json_data['fahrenheit'] = str(temp_f)
                     with open('/data/temps.json', 'a') as outfile:
                         outfile.write(json.dumps(json_data, indent=4, sort_keys=True))
