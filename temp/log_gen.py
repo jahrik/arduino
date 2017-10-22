@@ -51,7 +51,7 @@ def main():
                     json_data = json.loads(data.decode('utf8'))
                     json_data['date'] = stamp
                     json_data['temp_f'] = c_to_f(json_data['temp'])
-                    with open('temps.json', 'a') as outfile:
+                    with open('/data/temps.json', 'a') as outfile:
                         outfile.write(json.dumps(json_data, indent=4, sort_keys=True))
                         outfile.write(',\n')
 
