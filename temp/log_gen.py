@@ -32,7 +32,7 @@ def c_to_f(temp_c):
     input Celsius
     output Fahrenheit
     """
-    temp_f = 9.0/5.0 * temp_c + 32
+    temp_f = int(9.0)/int(5.0) * temp_c + int(32)
     return temp_f
 
 
