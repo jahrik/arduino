@@ -21,8 +21,8 @@ void loop() {
   if (dht11.read(pinDHT11, &temperature, &humidity, data)) {
     return;
   }
-  Serial.print("{\"temp\":\""); Serial.print((int)temperature);
-  Serial.print("\",\"humid\":\""); Serial.print((int)humidity);
+  Serial.print("{\"celsius\":\""); Serial.print((int)temperature);
+  Serial.print("\",\"humidity\":\""); Serial.print((int)humidity);
   Serial.println("\"}");
   delay(1000);
 }

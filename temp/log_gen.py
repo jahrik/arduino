@@ -47,11 +47,11 @@ def main():
             try:
                 data = ser.readline()[:-2]  # the last bit gets rid of the new-line chars
                 if data:
-                    stamp = '{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
+                    stamp = datetime.datetime.now().isoformat()
                     json_data = json.loads(data.decode('utf8'))
-                    json_data['date'] = stamp
+                    json_data['@timestamp'] = stamp
                     temp_f = c_to_f(json_data['temp'])
-                    json_data['temp_f'] = str(temp_f)
+                    json_data['fahrenheit'] = str(temp_f)
                     with open('/data/temps.json', 'a') as outfile:
                         outfile.write(json.dumps(json_data, indent=4, sort_keys=True))
                         outfile.write(',\n')
